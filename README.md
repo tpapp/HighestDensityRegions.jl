@@ -19,6 +19,10 @@ pkg> add https://github.com/tpapp/HighestDensityRegions.jl
 
 The single exported function is `hdr_thresholds`, which returns a vector thresholds for the given probabilities.
 
+[This example code](examples/1d-density.jl) was used to produce
+
+![examples/1d-density.svg](examples/1d-density.svg)
+
 ## Bibliography
 
 - Hyndman, R. J. (1996). Computing and graphing highest density regions. The American Statistician, 50(2), 120–126.
