@@ -1,8 +1,8 @@
 __precompile__()
 module HighestDensityRegions
 
-using ArgCheck
-using DocStringExtensions
+using ArgCheck: @argcheck
+using DocStringExtensions: SIGNATURES
 
 export hdr_thresholds
 
@@ -10,14 +10,14 @@ export hdr_thresholds
 # utilities
 
 """
-    $SIGNATURES
+$(SIGNATURES)
 
 Test if the given numbers are valid probabilities.
 """
 is_valid_probabilities(αs) =  all(0 .≤ αs .≤ 1)
 
 """
-    $SIGNATURES
+$(SIGNATURES)
 
 When `i == 0`, return `0` (with the element type of the vector), otherwise
 behaves like `getindex`.
@@ -26,7 +26,7 @@ behaves like `getindex`.
     i == 0 ? zero(T) : x[i]
 
 """
-    $SIGNATURES
+$(SIGNATURES)
 
 Find `i` in the sorted vector `xs` such that `xs[i-1] < α ≤ xs[i]`, with the
 assumed extension ``xs[0] = 0``.
@@ -55,7 +55,7 @@ function interpolate_in(xs, γ, i)
 end
 
 """
-    $SIGNATURES
+$(SIGNATURES)
 
 Return the thresholds for highest density regions with probability `αs`, given
 the sorted densities and cumulative probabilities (using the same sorting order)
@@ -80,18 +80,18 @@ cumprob(x) = cumsum(x) |> x -> x ./ x[end]
 # interface
 
 """
-    $SIGNATURES
+$(SIGNATURES)
 
 Return thresholds for the highest density regions with coverage probabilities
 `αs`.
 
 `counts` is a vector proportional to count data for some bin structure, while
 `densities` is a vector of corresponding densities. For each bin, it is assumed
-that `counts[i] = densities[i] * bin_size[i]`, where `bin_size[i]` is the
+that `counts[i] == densities[i] * bin_size[i]`, where `bin_size[i]` is the
 measure of the bin.
 
 A highest density region threshold `t` for a given `α` satisfies
-`sum(counts[densities .> t]) ≈ \alpha * sum(counts)`.
+`sum(counts[densities .> t]) ≈ α * sum(counts)`.
 
 When bins have the same size, `counts` may be omitted and assumed to be
 proportional to `densities`.

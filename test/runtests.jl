@@ -1,8 +1,7 @@
 using HighestDensityRegions
-using Base.Test
-
 using HighestDensityRegions:
     getindex_or_zero, interpolation_coefficient_and_index, interpolate_in
+using Test
 
 using Distributions
 using DocStringExtensions
@@ -42,7 +41,7 @@ univariate distribution.
 """
 function analytical_densities_and_counts(distribution, breaks)
     @assert issorted(breaks)
-    counts = diff(cdf.(distribution, breaks))
+    counts = diff(cdf.(Ref(distribution), breaks))
     densities = counts ./ diff(breaks)
     densities, counts
 end
@@ -69,8 +68,9 @@ end
 
 @testset "normal thresholds with evenly spaced breaks" begin
     N = 1000
-    densities, counts = analytical_densities_and_counts(Normal(0, 1),
-                                                        linspace(-4, 4, N))
+    breaks = range(-4; stop = 4, length = N)
+    densities, counts =
+        analytical_densities_and_counts(Normal(0, 1), breaks)
     αs = [0.25, 0.5, 0.75, 0.9]
     thresholds = hdr_thresholds(αs, densities, counts)
     test_coverage(αs, thresholds, densities, counts)
@@ -79,9 +79,8 @@ end
 end
 
 @testset "gamma thresholds with log breaks" begin
-    breaks = exp.(linspace(0, 2, 1000)) .- 1
-    densities, counts = analytical_densities_and_counts(Gamma(1, 1),
-                                                        linspace(-4, 4, 1000))
+    breaks = exp.(range(0; stop = 2, length = 1000)) .- 1
+    densities, counts = analytical_densities_and_counts(Gamma(1, 1), breaks)
     αs = [0.25, 0.5, 0.75, 0.9]
     thresholds = hdr_thresholds(αs, densities, counts)
     test_coverage(αs, thresholds, densities, counts)
