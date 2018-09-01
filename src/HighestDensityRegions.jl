@@ -1,4 +1,3 @@
-__precompile__()
 module HighestDensityRegions
 
 using ArgCheck: @argcheck
@@ -12,17 +11,10 @@ export hdr_thresholds
 """
 $(SIGNATURES)
 
-Test if the given numbers are valid probabilities.
-"""
-is_valid_probabilities(αs) =  all(0 .≤ αs .≤ 1)
-
-"""
-$(SIGNATURES)
-
 When `i == 0`, return `0` (with the element type of the vector), otherwise
 behaves like `getindex`.
 """
-@inline getindex_or_zero(x::AbstractVector{T}, i) where T =
+@inline getindex_or_zero(x::AbstractVector{T}, i::Integer) where T =
     i == 0 ? zero(T) : x[i]
 
 """
@@ -62,7 +54,7 @@ the sorted densities and cumulative probabilities (using the same sorting order)
 for each bin.
 """
 function interpolated_density_thresholds(αs, sorted_densities, cumprobs)
-    @argcheck is_valid_probabilities(αs)
+    @argcheck all(0 .≤ αs .≤ 1)
     map(αs) do α
         γ, i = interpolation_coefficient_and_index(cumprobs, 1 - α)
         interpolate_in(sorted_densities, γ, i)
@@ -70,7 +62,7 @@ function interpolated_density_thresholds(αs, sorted_densities, cumprobs)
 end
 
 """
-    $SIGNATURES
+$(SIGNATURES)
 
 Cumulative probability.
 """
