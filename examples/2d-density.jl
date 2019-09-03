@@ -1,6 +1,4 @@
-# call line below once to install
-# using Pkg; pkg"add PGFPlotsX"; pkg"add KernelDensity"; pkg"add Distributions"
-
+# consider using the project of this directory for tested versions
 using PGFPlotsX, KernelDensity, HighestDensityRegions, Distributions, Contour, LinearAlgebra
 
 d = MixtureModel([MultivariateNormal([-1, -1], Diagonal([0.5, 0.5])),
