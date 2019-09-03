@@ -19,9 +19,19 @@ pkg> add https://github.com/tpapp/HighestDensityRegions.jl
 
 The single exported function is `hdr_thresholds`, which returns a vector thresholds for the given probabilities.
 
+## Examples
+
+### 1D HPD coloring
+
 [This example code](examples/1d-density.jl) was used to produce
 
 ![examples/1d-density.svg](examples/1d-density.svg)
+
+### 2D HPD regions
+
+[This example code](examples/2d-density.jl) was used to produce
+
+![examples/2d-density.svg](examples/2d-density.svg)
 
 ## Bibliography
 
