@@ -5,8 +5,10 @@ using DocStringExtensions: SIGNATURES
 
 export hdr_thresholds
 
-
-# utilities
+####
+#### utilities
+####
+
 
 """
 $(SIGNATURES)
@@ -35,7 +37,7 @@ function interpolation_coefficient_and_index(xs::Vector{T}, α) where {T <: Real
 end
 
 """
-    $SIGNATURES
+$(SIGNATURES)
 
 Calculate the linear interpolation `(1-γ)*xs[i-1] + γ*xs[i]`, with the assumed
 extension ``xs[0] = 0``.
