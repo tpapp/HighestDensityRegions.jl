@@ -9,10 +9,8 @@ Julia library for calculating Highest Density Regions.
 
 ## Installation
 
-The package is not (yet) registered. Install with
-
 ```julia
-pkg> add https://github.com/tpapp/HighestDensityRegions.jl
+pkg> add HighestDensityRegions
 ```
 
 ## Usage
