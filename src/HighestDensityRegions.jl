@@ -28,7 +28,7 @@ assumed extension ``xs[0] = 0``.
 Return `γ, i` such that `interpolate_in(xs, γ, i) ≈ α`. See
 [`interpolate_in`](@ref).
 """
-function interpolation_coefficient_and_index(xs::Vector{T}, α) where {T <: Real}
+function interpolation_coefficient_and_index(xs::AbstractVector{T}, α) where {T <: Real}
     i = searchsortedfirst(xs, α)
     right = xs[i]
     left = getindex_or_zero(xs, i - 1)
