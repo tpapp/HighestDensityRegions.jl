@@ -8,7 +8,7 @@ ArgCheck = "dce04be8-c92d-5529-be00-80e4d2c0e197"
 DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 
 [compat]
-ArgCheck = "1, 2.1"
+ArgCheck = "1, 2"
 DocStringExtensions = "0.8"
 julia = "1"
 
